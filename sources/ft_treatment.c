@@ -6,11 +6,12 @@
 /*   By: rchallie <rchallie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 10:33:17 by rchallie          #+#    #+#             */
-/*   Updated: 2019/11/07 18:47:03 by rchallie         ###   ########.fr       */
+/*   Updated: 2019/11/12 18:02:27 by rchallie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+#include <stdio.h>
 
 int		ft_is_in_type_list(int c)
 {
@@ -25,115 +26,29 @@ int		ft_is_in_flags_list(int c)
 
 int		ft_treatment(int c, t_flags flags, va_list args)
 {
-	// c
-	char ch;
-
-	// s
-	char *str;
-
-	// d - i
-	char *d_i;
-
-	// u
-	unsigned int ui;
-	char *unsi_int;
-
-	// p
-	char *pointer;
-
-	// x
-	char *x;
+	int char_count;
 
 	// X
-	char *X;
+	// char *X;
 
+	char_count = 0;
 	if (c == 'c')
-	{	
-		ch = va_arg(args, int);
-		if (flags.minus == 1)
-			ft_putchar(ch);
-		ft_treat_width(flags.width, 1, 0);
-		if (flags.minus == 0)
-			ft_putchar(ch);
-	}
+		char_count = ft_treat_char(va_arg(args, int), flags);
 	else if (c == 's')
-	{
-		str = va_arg(args, char *);
-		if (flags.minus == 1)
-			ft_putstr(str);
-		ft_treat_width(flags.width, ft_strlen(str), 0);
-		if (flags.minus == 0)
-			ft_putstr(str);
-	}
-	else if (c == 'p')
-	{
-		pointer = ft_ull_base(va_arg(args, unsigned long long), 16);
-		pointer = ft_str_tolower(pointer);
-		if (flags.minus == 1)
-		{
-			ft_putstr("0x");
-			ft_putstr(pointer);
-		}
-		ft_treat_width(flags.width, ft_strlen(pointer) + 2, 0);
-		if (flags.minus == 0)
-		{
-			ft_putstr("0x");
-			ft_putstr(pointer);
-		}
-		free(pointer);
-	}
+		char_count = ft_treat_string(va_arg(args, char *), flags);
+	/*else if (c == 'p')
+		ft_treat_pointer(va_arg(args, unsigned long long), flags);*/
 	else if (c == 'd' || c == 'i')
-	{
-		d_i = ft_itoa(va_arg(args, int));
-		if (flags.minus == 1)
-			ft_putstr(d_i);
-		ft_treat_width(flags.width, ft_strlen(d_i), flags.zero);
-		if (flags.minus == 0)
-			ft_putstr(d_i);
-		free(d_i);
-	}
-	else if (c == 'u')
-	{
-		ui = (unsigned int)(4294967295 + 1
-				+ (unsigned int)va_arg(args, unsigned int));
-		unsi_int = ft_u_itoa(ui);
-		if (flags.minus == 1)
-			ft_putstr(unsi_int);
-		ft_treat_width(flags.width, ft_strlen(unsi_int), flags.zero);
-		if (flags.minus == 0)
-			ft_putstr(unsi_int);
-		free(unsi_int);
-	}
-	else if (c == 'x')
-	{
-		x = ft_ull_base(va_arg(args, unsigned long long), 16);
-		x = ft_str_tolower(x);
-		if (flags.minus == 1)
-			ft_putstr(x);
-		ft_treat_width(flags.width, ft_strlen(x), flags.zero);
-		if (flags.minus == 0)
-			ft_putstr(x);
-		free(x);
-	}
+		char_count = ft_treat_int(va_arg(args, int), flags);
+	/*else if (c == 'u')
+		ft_treat_uint((unsigned int)va_arg(args, unsigned int), flags);
+	*/else if (c == 'x')
+		char_count += ft_treat_hexa(va_arg(args, unsigned long long), 1, flags);
 	else if (c == 'X')
-	{
-		X = ft_ull_base(va_arg(args, unsigned long long), 16);
-		if (flags.minus == 1)
-			ft_putstr(X);
-		ft_treat_width(flags.width, ft_strlen(X), flags.zero);
-		if (flags.minus == 0)
-			ft_putstr(X);
-		free(X);
-	}
+		char_count += ft_treat_hexa(va_arg(args, unsigned long long), 0, flags);
 	else if (c == '%')
-	{
-		if (flags.minus == 1)
-			ft_putchar('%');
-		ft_treat_width(flags.width, 1, flags.zero);
-		if (flags.minus == 0)
-			ft_putchar('%');
-	}
-	else
-		ft_putstr("| No type find |"); //Sensé faire une erreur
-	return (0);
+		char_count += ft_treat_percent(flags);
+	/*else
+		ft_putstr("| No type find |");*/ //Sensé faire une erreur
+	return (char_count);
 }

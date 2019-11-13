@@ -6,7 +6,7 @@
 /*   By: rchallie <rchallie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 15:44:44 by rchallie          #+#    #+#             */
-/*   Updated: 2019/11/07 16:30:20 by rchallie         ###   ########.fr       */
+/*   Updated: 2019/11/12 17:54:09 by rchallie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,16 @@ int			ft_is_in_type_list(int c);
 int			ft_is_in_flags_list(int c);
 int			ft_treatment(int c, t_flags flags, va_list args);
 int			ft_treat_width(int width, int minus, int has_zero);
+int			ft_putstr(char *str, int prec);
+int			ft_treat_char(char c, t_flags flags);
+int			ft_treat_string(char *str, t_flags flags);
+int			ft_treat_int(int i, t_flags flags);
+int			ft_treat_percent(t_flags flags);
+int			ft_treat_hexa(unsigned long long ull, int lower, t_flags flags);
 
 void		ft_putchar(int c);
-void		ft_putstr(char *str);
+void		ft_treat_pointer(unsigned long long pointer, t_flags flags);
+void		ft_treat_uint(unsigned int unsi, t_flags flags);
 
 char		*ft_ull_base(unsigned long long ull, int base);
 char		*ft_u_itoa(unsigned int n);
