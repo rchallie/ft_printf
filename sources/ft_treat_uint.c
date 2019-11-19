@@ -6,38 +6,60 @@
 /*   By: rchallie <rchallie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 09:58:00 by rchallie          #+#    #+#             */
-/*   Updated: 2019/11/12 11:24:40 by rchallie         ###   ########.fr       */
+/*   Updated: 2019/11/19 13:49:11 by rchallie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static void	ft_put_part_uint(char *unsi_int, t_flags flags)
+static int	ft_in_put_part_uint(char *unsi_int, t_flags flags)
 {
-	if (flags.minus == 1)
+	int char_count;
+
+	char_count = 0;
+	if (flags.dot >= 0)
 	{
-		if (flags.dot == -1)
-			ft_putstr(unsi_int, ft_strlen(unsi_int));
-		else
-			ft_putstr(unsi_int, flags.dot);
+		char_count += ft_treat_width(flags.dot,
+		ft_strlen(unsi_int), 1);
+		char_count += ft_putstr(unsi_int, flags.dot);
 	}
-	ft_treat_width(flags.width, ft_strlen(unsi_int), flags.zero);
-	if (flags.minus == 0)
-	{
-		if (flags.dot == -1)
-			ft_putstr(unsi_int, ft_strlen(unsi_int));
-		else
-			ft_putstr(unsi_int, flags.dot);
-	}
+	else
+		char_count += ft_putstr(unsi_int, ft_strlen(unsi_int));
+	return (char_count);
 }
 
-void		ft_treat_uint(unsigned int unsi, t_flags flags)
+static int	ft_put_part_uint(char *unsi_int, t_flags flags)
 {
-	char				*unsi_int;
+	int char_count;
 
+	char_count = 0;
+	if (flags.minus == 1)
+		char_count += ft_in_put_part_uint(unsi_int, flags);
+	if (flags.dot >= 0)
+	{
+		flags.width -= flags.dot;
+		char_count += ft_treat_width(flags.width, 0, 0);
+	}
+	else
+		char_count += ft_treat_width(flags.width,
+		ft_strlen(unsi_int), flags.zero);
+	if (flags.minus == 0)
+		char_count += ft_in_put_part_uint(unsi_int, flags);
+	return (char_count);
+}
+
+int			ft_treat_uint(unsigned int unsi, t_flags flags)
+{
+	char	*unsi_int;
+	int		char_count;
+
+	char_count = 0;
 	unsi = (unsigned int)(4294967295 + 1
 				+ unsi);
 	unsi_int = ft_u_itoa(unsi);
-	ft_put_part_uint(unsi_int, flags);
+	if (flags.dot >= 0 && unsi != 0 && (size_t)flags.dot < ft_strlen(unsi_int))
+		flags.dot = ft_strlen(unsi_int);
+	char_count += ft_put_part_uint(unsi_int, flags);
 	free(unsi_int);
+	return (char_count);
 }

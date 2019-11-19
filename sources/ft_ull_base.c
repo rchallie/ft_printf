@@ -6,40 +6,16 @@
 /*   By: rchallie <rchallie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:06:58 by rchallie          #+#    #+#             */
-/*   Updated: 2019/11/12 18:27:54 by rchallie         ###   ########.fr       */
+/*   Updated: 2019/11/18 17:01:00 by rchallie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 #include <stdio.h>
 
-char	*ft_ull_base(unsigned long long ull, int base)
+static char	*treat_base(unsigned long long ull_save, int base,
+char *rtn, int count)
 {
-	char				*rtn;
-	unsigned long long	ull_save;
-	int					count;
-	int					neg;
-
-	rtn = 0;
-	count = 0;
-	ull_save = ull;
-	if (ull < 0)
-	{
-		count += 8;
-		neg = count;
-	}
-	else
-		neg = 0;
-	while (ull != 0)
-	{
-		ull /= base;
-		count++;
-	}
-	if (!(rtn = malloc(sizeof(char) * (count + 1))))
-		return (0);
-	rtn[count] = '\0';
-	while (--neg >= 0)
-		rtn[neg] = 'F';
 	while (ull_save != 0)
 	{
 		if ((ull_save % base) < 10)
@@ -49,5 +25,28 @@ char	*ft_ull_base(unsigned long long ull, int base)
 		ull_save /= base;
 		count--;
 	}
+	return (rtn);
+}
+
+char		*ft_ull_base(unsigned long long ull, int base)
+{
+	char				*rtn;
+	unsigned long long	ull_save;
+	int					count;
+
+	rtn = 0;
+	count = 0;
+	ull_save = ull;
+	if (ull == 0)
+		return (ft_strdup("0"));
+	while (ull != 0)
+	{
+		ull /= base;
+		count++;
+	}
+	if (!(rtn = malloc(sizeof(char) * (count + 1))))
+		return (0);
+	rtn[count] = '\0';
+	rtn = treat_base(ull_save, base, rtn, count);
 	return (rtn);
 }

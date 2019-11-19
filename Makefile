@@ -20,7 +20,8 @@ SRCS =  ft_printf.c \
 		sources/ft_treat_int.c \
 		sources/ft_treat_uint.c \
 		sources/ft_treat_percent.c \
-		sources/ft_treat_hexa.c
+		sources/ft_treat_hexa.c \
+		sources/ft_treat_flags.c 
 		
 SURPL_O = 	ft_treat_width.o \
 			ft_treatment.o \
@@ -36,7 +37,8 @@ SURPL_O = 	ft_treat_width.o \
 			ft_treat_int.o \
 			ft_treat_uint.o \
 			ft_treat_percent.o \
-			ft_treat_hexa.o
+			ft_treat_hexa.o \
+			ft_treat_flags.o  
 
 CC = gcc
 

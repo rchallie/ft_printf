@@ -6,12 +6,11 @@
 /*   By: rchallie <rchallie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 16:47:10 by rchallie          #+#    #+#             */
-/*   Updated: 2019/11/12 15:20:19 by rchallie         ###   ########.fr       */
+/*   Updated: 2019/11/16 11:33:40 by rchallie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-#include <stdio.h>
 
 static int		ft_put_part_int(char *str, t_flags flags)
 {
@@ -34,7 +33,7 @@ int				ft_treat_string(char *str, t_flags flags)
 
 	char_count = 0;
 	if (!str)
-		return (ft_putstr("(null)", 6));
+		str = "(null)";
 	if (flags.dot >= 0 && (size_t)flags.dot > ft_strlen(str))
 		flags.dot = ft_strlen(str);
 	if (flags.minus == 1)

@@ -6,7 +6,7 @@
 /*   By: rchallie <rchallie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 09:38:38 by rchallie          #+#    #+#             */
-/*   Updated: 2019/11/12 17:28:28 by rchallie         ###   ########.fr       */
+/*   Updated: 2019/11/16 12:03:53 by rchallie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static int	ft_put_part_int(char *d_i, int save_i, t_flags flags)
 	char_count = 0;
 	if (flags.minus == 1)
 		char_count += ft_in_put_part_int(d_i, save_i, flags);
+	if (flags.dot >= 0 && (size_t)flags.dot < ft_strlen(d_i))
+		flags.dot = ft_strlen(d_i);
 	if (flags.dot >= 0)
 	{
 		flags.width -= flags.dot;
@@ -62,9 +64,7 @@ int			ft_treat_int(int i, t_flags flags)
 	{
 		if (flags.zero == 1 && flags.dot == -1)
 			ft_putstr("-", 1);
-		//printf("AAAAAAAA\n");
 		i *= -1;
-		flags.minus = 0;
 		flags.zero = 1;
 		flags.width--;
 		char_count++;
