@@ -1,9 +1,9 @@
-# ❌ ft_printf
+# ✅ ft_printf
 Ft_printf (42cursus) 2019-2020
 
-- Actual Status : In progress.
-- Result        : (null)
-- Observations : Not normed, not ended
+- Actual Status : finished.
+- Result        : 100%
+- Observations : Without bonus flags/conversions 
 
 This is my ft_printf project from the 42 cursus,
 need help:
