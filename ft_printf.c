@@ -6,18 +6,16 @@
 /*   By: rchallie <rchallie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 17:09:36 by rchallie          #+#    #+#             */
-/*   Updated: 2019/11/18 17:25:46 by rchallie         ###   ########.fr       */
+/*   Updated: 2019/11/21 10:08:29 by rchallie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_printf.h"
-#include <stdio.h>
 
 t_flags		ft_init_flags(void)
 {
 	t_flags		flags;
 
-	flags.already_print = 0;
 	flags.dot = -1;
 	flags.minus = 0;
 	flags.star = 0;

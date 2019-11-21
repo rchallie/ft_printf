@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_treat_width.c                                   :+:      :+:    :+:   */
+/*   ft_putstrprec.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rchallie <rchallie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/07 10:31:51 by rchallie          #+#    #+#             */
-/*   Updated: 2019/11/20 17:35:59 by rchallie         ###   ########.fr       */
+/*   Created: 2019/11/07 15:33:15 by rchallie          #+#    #+#             */
+/*   Updated: 2019/11/20 17:39:57 by rchallie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int		ft_treat_width(int width, int minus, int has_zero)
+int		ft_putstrprec(char *str, int prec)
 {
 	int char_count;
 
 	char_count = 0;
-	while (width - minus > 0)
-	{
-		if (has_zero)
-			ft_putchar('0');
-		else
-			ft_putchar(' ');
-		width -= 1;
-		char_count++;
-	}
+	while (str[char_count] && char_count < prec)
+		ft_putchar(str[char_count++]);
 	return (char_count);
 }

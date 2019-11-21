@@ -6,7 +6,7 @@
 /*   By: rchallie <rchallie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 15:44:44 by rchallie          #+#    #+#             */
-/*   Updated: 2019/11/18 17:25:30 by rchallie         ###   ########.fr       */
+/*   Updated: 2019/11/20 17:12:32 by rchallie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int					ft_is_in_type_list(int c);
 int					ft_is_in_flags_list(int c);
 int					ft_treatment(int c, t_flags flags, va_list args);
 int					ft_treat_width(int width, int minus, int has_zero);
-int					ft_putstr(char *str, int prec);
+int					ft_putstrprec(char *str, int prec);
 int					ft_treat_char(char c, t_flags flags);
 int					ft_treat_string(char *str, t_flags flags);
 int					ft_treat_int(int i, t_flags flags);

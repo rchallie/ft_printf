@@ -6,12 +6,11 @@
 /*   By: rchallie <rchallie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:06:58 by rchallie          #+#    #+#             */
-/*   Updated: 2019/11/18 17:01:00 by rchallie         ###   ########.fr       */
+/*   Updated: 2019/11/20 17:40:25 by rchallie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-#include <stdio.h>
 
 static char	*treat_base(unsigned long long ull_save, int base,
 char *rtn, int count)

@@ -6,12 +6,11 @@
 /*   By: rchallie <rchallie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 10:33:17 by rchallie          #+#    #+#             */
-/*   Updated: 2019/11/18 12:20:10 by rchallie         ###   ########.fr       */
+/*   Updated: 2019/11/20 17:40:18 by rchallie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-#include <stdio.h>
 
 int		ft_is_in_type_list(int c)
 {

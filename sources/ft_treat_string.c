@@ -6,7 +6,7 @@
 /*   By: rchallie <rchallie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 16:47:10 by rchallie          #+#    #+#             */
-/*   Updated: 2019/11/16 11:33:40 by rchallie         ###   ########.fr       */
+/*   Updated: 2019/11/20 17:39:29 by rchallie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@ static int		ft_put_part_int(char *str, t_flags flags)
 	if (flags.dot >= 0)
 	{
 		char_count += ft_treat_width(flags.dot, ft_strlen(str), 0);
-		char_count += ft_putstr(str, flags.dot);
+		char_count += ft_putstrprec(str, flags.dot);
 	}
 	else
-		char_count += ft_putstr(str, ft_strlen(str));
+	{
+		char_count += ft_putstrprec(str, ft_strlen(str));
+	}
 	return (char_count);
 }
 

@@ -1,5 +1,3 @@
-_CYAN=$'\x1b[36m
-
 LIBFT = ./libft/libft.a
 
 N_TEMP = temp.a
@@ -13,7 +11,7 @@ SRCS =  ft_printf.c \
 		sources/ft_ull_base.c \
 		sources/ft_putchar.c \
 		sources/ft_str_tolower.c \
-		sources/ft_putstr.c \
+		sources/ft_putstrprec.c \
 		sources/ft_treat_string.c \
 		sources/ft_treat_char.c \
 		sources/ft_treat_pointer.c \
@@ -30,7 +28,7 @@ SURPL_O = 	ft_treat_width.o \
 			ft_ull_base.o \
 			ft_putchar.o \
 			ft_str_tolower.o \
-			ft_putstr.o \
+			ft_putstrprec.o \
 			ft_treat_string.o \
 			ft_treat_char.o \
 			ft_treat_pointer.o \
@@ -49,11 +47,10 @@ INCLUDES = -I./includes
 OBJS = $(SRCS:.c=.o)
 
 $(NAME): $(OBJS)
-	$(MAKE) -C ./libft
+	$(MAKE) bonus -C ./libft
+	cp libft/libft.a $(NAME)
 	$(CC) $(FLAGS) $(INCLUDES) $(SRCS)
-	ar r $(N_TEMP) $(OBJS)
-	libtool -static -o $(NAME) $(N_TEMP) $(LIBFT)
-	rm -rf $(N_TEMP)
+	ar -rcs $(NAME) $(OBJS)
 
 all : $(NAME)
 
